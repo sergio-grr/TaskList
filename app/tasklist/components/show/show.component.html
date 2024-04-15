@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="mb-3">Lista de Tareas</h2>
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let task of taskList; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="flex-grow-1 d-flex align-items-center">
+            <input type="checkbox" [(ngModel)]="task.completed" (change)="onTaskCompletion(task)" class="form-check-input me-2">
+            <span class="text-primary me-2">{{ i + 1 }}.</span>
+            <span [ngClass]="{'text-decoration-line-through': task.completed}">{{ task.name }}</span>
+          </div>
+          <button class="btn btn-sm btn-danger" (click)="onDeleteTask(task.id)">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-header">
+        LocalStorage
+        </div>
+        <div class="card-body">
+          <ul *ngIf="localStorageTasks.length > 0">
+            <li *ngFor="let task of localStorageTasks">{{ task.name }}</li>
+          </ul>
+          <p *ngIf="localStorageTasks.length === 0">No hay tareas en el LocalStorage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
